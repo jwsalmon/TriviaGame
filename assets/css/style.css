@@ -1,0 +1,12 @@
+body{
+    background-image: url(../images/TriviaTime.png);
+}
+.row{
+    margin: 50;
+    height: 100%;
+    width: 100%;
+}
+.quest,
+.answer{
+    margin:10px;
+}
