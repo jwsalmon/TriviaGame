@@ -124,7 +124,7 @@ function setQuestion() {
     }
 }
 function checkAnswer(choice,correctAnswer,gif) {
-//check if correct answer selected if so display sucess
+//check if correct answer selected if so display success and gif
 
 //if not display failure with correct answer and gif
 }
