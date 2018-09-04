@@ -120,7 +120,9 @@ function setQuestion() {
     }
 }
 function checkAnswer() {
+//check if correct answer selected if so display sucess
 
+//if not display failure with correct answer and gif
 }
 function run() {
     $("#timesUp").hide();
