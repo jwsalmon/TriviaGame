@@ -1,5 +1,5 @@
 var time = 30;
-var intervalId, delayTimesUp, delayRestart;
+var intervalId, delayTimesUp, delayRestart,delayFailure,delaySuccess;
 var qestionArray;
 var questionNumber=0;
 var numCorrect,numUnAnswered,numWrong;
@@ -101,7 +101,7 @@ function shuffle(array) {
     
  } 
 function setQuestion() {
-    if (questionNumber === qestionArray.length ){
+    if (questionNumber !== qestionArray.length ){
         $("#question").text(qestionArray[questionNumber].question);
         $("#ans1").text(questionArray[questionNumber].answerOne);
         $("#ans2").text(questionArray[questionNumber].answerTwo);
@@ -109,6 +109,14 @@ function setQuestion() {
         $("#ans4").text(questionArray[questionNumber].answerFour);
         $("#question").attr("data-rgtAns", questionArray[questionNumber].rightAns);
         $("#question").attr("data-gif", questionArray[questionNumber].answerGif);
+        questionNumber++;
+    }
+    else{
+        clearTimeout(delayRestart);
+        clearInterval(intervalId); 
+        clearTimeout(delayFailure);
+        clearTimeout(delaySuccess);
+        endQuiz();
     }
 }
 function checkAnswer() {
@@ -162,10 +170,10 @@ function timesUp() {
 }
 function failure() {
     numWrong++;
-    delayTimesUp = setTimeout(function () {
+    delayFailure = setTimeout(function () {
         $("#failure").show();
         $("#quiz").hide();
-        clearTimeout(delayTimesUp);
+        clearTimeout(delayFailure);
     }, 3000);
 
     delayRestart = setTimeout(function () {
@@ -178,10 +186,10 @@ function failure() {
 }
 function success() {
     numCorrect++;
-    delayTimesUp = setTimeout(function () {
+    delaySuccess = setTimeout(function () {
         $("#correct").show();
         $("#quiz").hide();
-        clearTimeout(delayTimesUp);
+        clearTimeout(delaySuccess);
     }, 3000);
 
     delayRestart = setTimeout(function () {
