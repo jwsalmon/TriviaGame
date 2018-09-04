@@ -104,9 +104,13 @@ function setQuestion() {
     if (questionNumber !== qestionArray.length ){
         $("#question").text(qestionArray[questionNumber].question);
         $("#ans1").text(questionArray[questionNumber].answerOne);
+        $("#ans1").attr("data-choice","a");
         $("#ans2").text(questionArray[questionNumber].answerTwo);
+        $("#ans2").attr("data-choice","b");
         $("#ans3").text(questionArray[questionNumber].answerThree);
+        $("#ans3").attr("data-choice","c");
         $("#ans4").text(questionArray[questionNumber].answerFour);
+        $("#ans4").attr("data-choice","d");
         $("#question").attr("data-rgtAns", questionArray[questionNumber].rightAns);
         $("#question").attr("data-gif", questionArray[questionNumber].answerGif);
         questionNumber++;
@@ -119,7 +123,7 @@ function setQuestion() {
         endQuiz();
     }
 }
-function checkAnswer() {
+function checkAnswer(choice,correctAnswer,gif) {
 //check if correct answer selected if so display sucess
 
 //if not display failure with correct answer and gif
@@ -204,7 +208,14 @@ function success() {
 }
 
 $(document).ready(function () {
-    $(".answerBtn").on("click", checkAnswer);
+    $(".answerBtn").on("click", function(){
+        //get value of choice, correct answer and gif
+        var choice = $(this).attr("data-choice");
+        var correctanswer = $("#question").attr("data-rgtAns");
+        var gif = $("#question").attr("data-gif");
+        //call check answer function pass in above values;
+        checkAnswer(choice, correctanswer,gif);
+    });
     qestionArray = shuffle(Questions);
 });
 
