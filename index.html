@@ -22,13 +22,13 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container" id="quiz">
         <div class="row bg-warning align-items-center">
             <div class="row">
                 <div class="col-md-3"></div>
                 <div class="col-md-3"></div>
                 <div class="col-md-3">
-                    <h1 id="timer">30 seconds</h1>
+                    <h1 id="timer">00:30</h1>
                 </div>
             </div>
             <div class="row quest">
@@ -38,34 +38,78 @@
                 <div class="col-md-3"></div>
                 <div class="col-md-3"></div>
                 <div class="col-md-3">
-                    <button type="button" class="btn btn-info" id="ans1">a</button>
+                    <button type="button" class="btn btn-info answerBtn" id="ans1">a</button>
                 </div>
             </div>
             <div class="row answer">
                 <div class="col-md-3"></div>
                 <div class="col-md-3"></div>
                 <div class="col-md-3">
-                    <button type="button" class="btn btn-info" id="ans2">b</button>
+                    <button type="button" class="btn btn-info answerBtn" id="ans2">b</button>
                 </div>
             </div>
             <div class="row answer">
                 <div class="col-md-3"></div>
                 <div class="col-md-3"></div>
                 <div class="col-md-3">
-                    <button type="button" class="btn btn-info" id="ans1">c</button>
+                    <button type="button" class="btn btn-info answerBtn" id="ans3">c</button>
                 </div>
             </div>
             <div class="row answer">
                 <div class="col-md-3"></div>
                 <div class="col-md-3"></div>
                 <div class="col-md-3">
-                    <button type="button" class="btn btn-info" id="ans1">d</button>
+                    <button type="button" class="btn btn-info answerBtn" id="ans4">d</button>
                 </div>
             </div>
         </div>
     </div>
+    <div class="container" id="timesUp">
+        <div class="row bg-warning align-items-center">
+            <div class="col-md-3">
+                    <img src="" alt="answer" class="answerGif">
+            </div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3">
+                <img src="assets/images/timesup.gif">
+            </div>
+        </div>
+    </div>
+    <div class="container" id="correct">
+        <div class="row bg-warning align-items-center">
+            <div class="col-md-3">
+                    <img src="" alt="answer" class="answerGif">
+            </div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3">
+                <img src="assets/images/timesup.gif" id="success">
+            </div>
+        </div>
+    </div>
+    <div class="container" id="failure">
+        <div class="row bg-warning align-items-center">
+            <div class="col-md-3">
+                <img src="" alt="answer" class="answerGif">
+            </div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3">
+                <img src="assets/images/timesup.gif" id="fail">
+            </div>
+        </div>
+    </div>
 
-
+    <div class="container" id="QuizDone">
+            <div class="row bg-warning align-items-center">
+                <div class="col-md-3"></div>
+                <div class="col-md-3"></div>
+                <div class="col-md-3">
+                    <h3 id="numCorrect">Number of Questions Correct: 0</h3>
+                    <h3 id="numWrong">Number of Questions Wrong: 0</h3>
+                    <h3 id="numUnAnswered">Number of Questions not Answered: 0</h3>
+                </div>
+            </div>
+        </div>
+    
 
     <script src="assets/javascript/app.js"></script>
 </body>
