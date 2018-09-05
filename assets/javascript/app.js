@@ -97,6 +97,9 @@ function shuffle(array) {
 function reset() {
     questionArray = shuffle(Questions);
     questionNumber = 0;
+    numCorrect = 0;
+    numUnAnswered = 0;
+    numWrong = 0;
 
 }
 function endQuiz() {
@@ -111,6 +114,7 @@ function endQuiz() {
     $("#QuizDone").show();
     clearTimeout(delayEndQuiz);
     }, 3000);
+
     delayRestart = setTimeout(function () {
         $("#QuizDone").hide();
         $("#quiz").show();
@@ -206,6 +210,7 @@ function timesUp() {
 }
 function failure() {
     numWrong++;
+    stop();
     delayFailure = setTimeout(function () {
         $("#failure").show();
         $("#quiz").hide();
@@ -222,6 +227,7 @@ function failure() {
 }
 function success() {
     numCorrect++;
+    stop();
     delaySuccess = setTimeout(function () {
         $("#correct").show();
         $("#quiz").hide();
