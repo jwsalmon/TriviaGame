@@ -1,6 +1,6 @@
 var time = 30;
 var intervalId, delayTimesUp, delayRestart,delayFailure,delaySuccess;
-var qestionArray;
+var questionArray = [];
 var questionNumber=0;
 var numCorrect,numUnAnswered,numWrong;
 var questionOne = {
@@ -88,7 +88,11 @@ function shuffle(array) {
   
     return array;
   }
-  
+  function reset(){
+    questionArray = shuffle(Questions);
+    questionNumber=0;
+
+  }
  function endQuiz(){
     $("#timesUp").hide();
     $("#correct").hide();
@@ -101,8 +105,8 @@ function shuffle(array) {
     
  } 
 function setQuestion() {
-    if (questionNumber !== qestionArray.length ){
-        $("#question").text(qestionArray[questionNumber].question);
+    if (questionNumber !== questionArray.length ){
+        $("#question").text(questionArray[questionNumber].question);
         $("#ans1").text(questionArray[questionNumber].answerOne);
         $("#ans1").attr("data-choice","a");
         $("#ans2").text(questionArray[questionNumber].answerTwo);
@@ -132,6 +136,8 @@ function run() {
     $("#timesUp").hide();
     $("#correct").hide();
     $("#failure").hide();
+    $("#QuizDone").hide();
+    setQuestion();
     clearTimeout(delayRestart);
     clearInterval(intervalId);
     intervalId = setInterval(count, 1000);
@@ -216,7 +222,7 @@ $(document).ready(function () {
         //call check answer function pass in above values;
         checkAnswer(choice, correctanswer,gif);
     });
-    qestionArray = shuffle(Questions);
+    
 });
 
 function timeConverter(t) {
@@ -239,5 +245,5 @@ function timeConverter(t) {
 
     return minutes + ":" + seconds;
 }
-
+reset()
 run();
