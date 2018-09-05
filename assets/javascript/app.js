@@ -1,8 +1,8 @@
 var time = 30;
-var intervalId, delayTimesUp, delayRestart,delayFailure,delaySuccess;
+var intervalId, delayTimesUp, delayRestart, delayFailure, delaySuccess,delayEndQuiz;
 var questionArray = [];
-var questionNumber=0;
-var numCorrect,numUnAnswered,numWrong;
+var questionNumber = 0;
+var numCorrect, numUnAnswered, numWrong;
 var questionOne = {
     question: "Which beatle died in 1980",
     answerOne: "John",
@@ -10,7 +10,7 @@ var questionOne = {
     answerThree: "George",
     answerFour: "Ringo",
     answerGif: "assets/images/johnLenon.gif",
-    rightAns:"a"
+    rightAns: "a"
 };
 var questionTwo = {
     question: "Who sung Henry VIII",
@@ -18,82 +18,89 @@ var questionTwo = {
     answerTwo: "Paul Revere and the Raiders",
     answerThree: "Four Seasons",
     answerFour: "Kiss",
-    answerGif:"assets/images/paulrevereandtheraiders.gif",
-    rightAns:"b"  
+    answerGif: "assets/images/paulrevereandtheraiders.gif",
+    rightAns: "b"
 };
-var questionThree = {question:"Who sung Rock and Roll all Night",
-                 answerOne:"Dave Matthews Band",
-                 answerTwo:"Kiss",
-                 answerThree:"AC/DC",
-                 answerFour:"Bob Dylan",
-                 answerGif:"assets/images/Kiss.gif",
-                 rightAns:"a"     
+var questionThree = {
+    question: "Who sung Rock and Roll all Night",
+    answerOne: "Dave Matthews Band",
+    answerTwo: "Kiss",
+    answerThree: "AC/DC",
+    answerFour: "Bob Dylan",
+    answerGif: "assets/images/Kiss.gif",
+    rightAns: "a"
 };
-var questionFour={question:"which singer comes from Minnesota",
-                 answerOne:"Gene Simmons",
-                 answerTwo:"Paul McCartney",
-                 answerThree:"Paul Revere",
-                 answerFour:"Bob Dylan", 
-                 answerGif:"assets/images/bobdylan.gif",
-                 rightAns:"d"                     
+var questionFour = {
+    question: "which singer comes from Minnesota",
+    answerOne: "Gene Simmons",
+    answerTwo: "Paul McCartney",
+    answerThree: "Paul Revere",
+    answerFour: "Bob Dylan",
+    answerGif: "assets/images/bobdylan.gif",
+    rightAns: "d"
 };
-var questionFive={question:"which band has a song with the lyrics 'I am the egg man'",
-                 answerOne:"Kiss",
-                 answerTwo:"Beatles",
-                 answerThree:"Rolling Stones",
-                 answerFour:"The Who",
-                 answerGif: "assets/images/beatles.gif",
-                 rightAns:"b"     
+var questionFive = {
+    question: "which band has a song with the lyrics 'I am the egg man'",
+    answerOne: "Kiss",
+    answerTwo: "Beatles",
+    answerThree: "Rolling Stones",
+    answerFour: "The Who",
+    answerGif: "assets/images/beatles.gif",
+    rightAns: "b"
 };
-var questionSix={question:"who sings 'Crash Into Me'",
-                 answerOne:"Kiss",
-                 answerTwo:"Beatles",
-                 answerThree:"Rolling Stones",
-                 answerFour:"Dave Matthews Band",
-                 answerGif:"assets/images/davematthewsband.gif",
-                 rightAns:"d"  
+var questionSix = {
+    question: "who sings 'Crash Into Me'",
+    answerOne: "Kiss",
+    answerTwo: "Beatles",
+    answerThree: "Rolling Stones",
+    answerFour: "Dave Matthews Band",
+    answerGif: "assets/images/davematthewsband.gif",
+    rightAns: "d"
 };
-var questionSeven={question:"who's lead singer is know for his Lips",
-                 answerOne:"Kiss",
-                 answerTwo:"Beatles",
-                 answerThree:"Rolling Stones",
-                 answerFour:"Areosmith",
-                 answerGif:"assets/images/rollingstones.gif" ,
-                 rightAns:"c" 
+var questionSeven = {
+    question: "who's lead singer is know for his Lips",
+    answerOne: "Kiss",
+    answerTwo: "Beatles",
+    answerThree: "Rolling Stones",
+    answerFour: "Areosmith",
+    answerGif: "assets/images/rollingstones.gif",
+    rightAns: "c"
 };
-var questionEight={question:"who are the Boy from Jersey",
-                 answerOne:"Commodores",
-                 answerTwo:"Beatles",
-                 answerThree:"The Supremes",
-                 answerFour:"Four Seasons",
-                 answerGif:"assets/images/fourseasons.gif",
-                 rightAns:"d"
+var questionEight = {
+    question: "who are the Boy from Jersey",
+    answerOne: "Commodores",
+    answerTwo: "Beatles",
+    answerThree: "The Supremes",
+    answerFour: "Four Seasons",
+    answerGif: "assets/images/fourseasons.gif",
+    rightAns: "d"
 };
-var Questions = [questionOne,questionTwo,questionThree,questionFour,questionFive,questionSix,questionSeven,questionEight];
+var Questions = [questionOne, questionTwo, questionThree, questionFour, questionFive, questionSix, questionSeven, questionEight];
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
-  
+
     // While there remain elements to shuffle...
     while (0 !== currentIndex) {
-  
-      // Pick a remaining element...
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-  
-      // And swap it with the current element.
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
-    }
-  
-    return array;
-  }
-  function reset(){
-    questionArray = shuffle(Questions);
-    questionNumber=0;
 
-  }
- function endQuiz(){
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+}
+function reset() {
+    questionArray = shuffle(Questions);
+    questionNumber = 0;
+
+}
+function endQuiz() {
+    delayEndQuiz = setTimeout(function () {
     $("#timesUp").hide();
     $("#correct").hide();
     $("#failure").hide();
@@ -102,35 +109,52 @@ function shuffle(array) {
     $("#numWrong").text("Number of Questions Wrong: " + numWrong);
     $("#numUnAnswered").text("Number of Questions not Answered: " + numUnAnswered);
     $("#QuizDone").show();
-    
- } 
+    clearTimeout(delayEndQuiz);
+    }, 3000);
+    delayRestart = setTimeout(function () {
+        $("#QuizDone").hide();
+        $("#quiz").show();
+        time = 30;
+        reset();
+        run();
+        clearTimeout(delayRestart);
+    }, 15000);
+
+}
 function setQuestion() {
-    if (questionNumber !== questionArray.length ){
+    if (questionNumber !== questionArray.length) {
         $("#question").text(questionArray[questionNumber].question);
         $("#ans1").text(questionArray[questionNumber].answerOne);
-        $("#ans1").attr("data-choice","a");
+        $("#ans1").attr("data-choice", "a");
         $("#ans2").text(questionArray[questionNumber].answerTwo);
-        $("#ans2").attr("data-choice","b");
+        $("#ans2").attr("data-choice", "b");
         $("#ans3").text(questionArray[questionNumber].answerThree);
-        $("#ans3").attr("data-choice","c");
+        $("#ans3").attr("data-choice", "c");
         $("#ans4").text(questionArray[questionNumber].answerFour);
-        $("#ans4").attr("data-choice","d");
+        $("#ans4").attr("data-choice", "d");
         $("#question").attr("data-rgtAns", questionArray[questionNumber].rightAns);
-        $("#question").attr("data-gif", questionArray[questionNumber].answerGif);
+       // $("#question").attr("data-gif", questionArray[questionNumber].answerGif);
+
+        $(".answerGif").attr("src", questionArray[questionNumber].answerGif);
         questionNumber++;
     }
-    else{
+    else {
         clearTimeout(delayRestart);
-        clearInterval(intervalId); 
+        clearInterval(intervalId);
         clearTimeout(delayFailure);
         clearTimeout(delaySuccess);
+        clearTimeout(delayEndQuiz);
         endQuiz();
     }
 }
-function checkAnswer(choice,correctAnswer,gif) {
-//check if correct answer selected if so display success and gif
-
-//if not display failure with correct answer and gif
+function checkAnswer(choice, correctAnswer) {
+    //check if correct answer selected if so display success and gif
+    if(choice === correctAnswer){
+        success(); 
+    }
+    else{//if not display failure with correct answer and gif
+        failure();
+    }
 }
 function run() {
     $("#timesUp").hide();
@@ -214,15 +238,14 @@ function success() {
 }
 
 $(document).ready(function () {
-    $(".answerBtn").on("click", function(){
+    $(".answerBtn").on("click", function () {
         //get value of choice, correct answer and gif
         var choice = $(this).attr("data-choice");
         var correctanswer = $("#question").attr("data-rgtAns");
-        var gif = $("#question").attr("data-gif");
         //call check answer function pass in above values;
-        checkAnswer(choice, correctanswer,gif);
+        checkAnswer(choice, correctanswer);
     });
-    
+
 });
 
 function timeConverter(t) {
