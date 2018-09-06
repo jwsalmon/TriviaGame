@@ -28,7 +28,7 @@ var questionThree = {
     answerThree: "AC/DC",
     answerFour: "Bob Dylan",
     answerGif: "assets/images/Kiss.gif",
-    rightAns: "a"
+    rightAns: "b"
 };
 var questionFour = {
     question: "which singer comes from Minnesota",
@@ -138,8 +138,25 @@ function setQuestion() {
         $("#ans4").attr("data-choice", "d");
         $("#question").attr("data-rgtAns", questionArray[questionNumber].rightAns);
        // $("#question").attr("data-gif", questionArray[questionNumber].answerGif);
-
+        
         $(".answerGif").attr("src", questionArray[questionNumber].answerGif);
+        var crrtAns = questionArray[questionNumber].rightAns;
+        var textAns = "";
+        switch (crrtAns){
+            case "a":
+            textAns = questionArray[questionNumber].answerOne;
+            break;
+            case "b":
+            textAns = questionArray[questionNumber].answerTwo;
+            break;
+            case "c":
+            textAns = questionArray[questionNumber].answerThree;
+            break;
+            case "d":
+            textAns = questionArray[questionNumber].answerFour;
+            break;
+        }
+        $(".answerTxt").text(textAns);
         questionNumber++;
     }
     else {
